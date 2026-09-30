@@ -90,6 +90,7 @@ export type Database = {
           precio_cop: number;
           proceso_id: string | null;
           profesional_id: string;
+          reprogramacion_gratuita: boolean;
           reprogramada_de: string | null;
           saldo_cop: number;
           servicio_id: string;
@@ -115,6 +116,7 @@ export type Database = {
           precio_cop: number;
           proceso_id?: string | null;
           profesional_id: string;
+          reprogramacion_gratuita?: boolean;
           reprogramada_de?: string | null;
           saldo_cop: number;
           servicio_id: string;
@@ -140,6 +142,7 @@ export type Database = {
           precio_cop?: number;
           proceso_id?: string | null;
           profesional_id?: string;
+          reprogramacion_gratuita?: boolean;
           reprogramada_de?: string | null;
           saldo_cop?: number;
           servicio_id?: string;
@@ -165,6 +168,13 @@ export type Database = {
             columns: ["persona_id"];
             isOneToOne: false;
             referencedRelation: "personas";
+            referencedColumns: ["id"];
+          },
+          {
+            foreignKeyName: "citas_politica_fkey";
+            columns: ["politica_aceptada_id"];
+            isOneToOne: false;
+            referencedRelation: "politicas_versionadas";
             referencedColumns: ["id"];
           },
           {
@@ -242,6 +252,36 @@ export type Database = {
           id?: string;
           tipo?: string;
           titulo?: string;
+          version?: number;
+          vigente_desde?: string;
+        };
+        Relationships: [];
+      };
+      politicas_versionadas: {
+        Row: {
+          activa: boolean;
+          contenido: string;
+          created_at: string;
+          id: string;
+          reglas: Json;
+          version: number;
+          vigente_desde: string;
+        };
+        Insert: {
+          activa?: boolean;
+          contenido: string;
+          created_at?: string;
+          id?: string;
+          reglas: Json;
+          version: number;
+          vigente_desde?: string;
+        };
+        Update: {
+          activa?: boolean;
+          contenido?: string;
+          created_at?: string;
+          id?: string;
+          reglas?: Json;
           version?: number;
           vigente_desde?: string;
         };
@@ -693,6 +733,46 @@ export type Database = {
       tipos_consentimiento_requeridos: {
         Args: { p_persona_id: string };
         Returns: string[];
+      };
+      calcular_consecuencia: {
+        Args: { p_accion: string; p_cita_id: string };
+        Returns: {
+          cobrar_cop: number;
+          devolver_cop: number;
+          permitida: boolean;
+          retener_cop: number;
+          tramo: string;
+          trasladar_cop: number;
+        }[];
+      };
+      consecuencia_politica: {
+        Args: {
+          p_accion: string;
+          p_ahora: string;
+          p_anticipo_pagado_cop: number;
+          p_confirmada?: boolean;
+          p_gratis_usadas: number;
+          p_inicio: string;
+          p_precio_cop: number;
+          p_quien: string;
+          p_reglas: Json;
+        };
+        Returns: {
+          cobrar_cop: number;
+          devolver_cop: number;
+          permitida: boolean;
+          retener_cop: number;
+          tramo: string;
+          trasladar_cop: number;
+        }[];
+      };
+      politica_aceptada_por_mi: {
+        Args: { p_politica_id: string };
+        Returns: boolean;
+      };
+      publicar_politica: {
+        Args: { p_contenido: string; p_reglas: Json };
+        Returns: string;
       };
       cambiar_estado_cita: {
         Args: { p_cita_id: string; p_motivo?: string; p_nuevo_estado: string };

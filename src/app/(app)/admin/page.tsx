@@ -33,6 +33,16 @@ export default function PaginaAdmin() {
             </p>
           </Tarjeta>
         </Link>
+        <Link href="/admin/politica">
+          <Tarjeta className="hover:bg-primario/5 h-full transition-colors">
+            <p className="text-primario font-semibold">
+              Política de cancelación
+            </p>
+            <p className="text-suave mt-1 text-sm">
+              Plazos, porcentajes y texto, con versiones.
+            </p>
+          </Tarjeta>
+        </Link>
       </div>
       <EstadoVacio
         titulo="Próximamente"
