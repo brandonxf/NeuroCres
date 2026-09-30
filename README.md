@@ -38,6 +38,17 @@ Las migraciones viven en `supabase/migrations/` y se versionan en el repositorio
 
 Entornos: `neurocres-dev` (desarrollo) y `neurocres-prod` (producción). Nunca se prueba sobre producción.
 
+## Usuarios de prueba
+
+Contraseña de todos: `NeuroCres#Prueba1`
+
+| Correo                       | Roles                          |
+| ---------------------------- | ------------------------------ |
+| `consultante@neurocres.test` | consultante                    |
+| `responsable@neurocres.test` | consultante, responsable_legal |
+| `profesional@neurocres.test` | consultante, profesional       |
+| `admin@neurocres.test`       | consultante, administrador     |
+
 ## Marca
 
 | Color      | Hex       |
