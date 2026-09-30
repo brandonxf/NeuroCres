@@ -14,6 +14,23 @@ export type Database = {
   };
   public: {
     Tables: {
+      auditoria: {
+        Row: {
+          accion: string;
+          actor_id: string | null;
+          created_at: string;
+          entidad: string;
+          entidad_id: string | null;
+          id: string;
+          ip: unknown;
+          metadata: Json;
+          persona_id: string | null;
+          user_agent: string | null;
+        };
+        Insert: never;
+        Update: never;
+        Relationships: [];
+      };
       configuracion: {
         Row: {
           clave: string;
@@ -264,6 +281,18 @@ export type Database = {
         Returns: string;
       };
       es_dueno_de_persona: { Args: { p_persona_id: string }; Returns: boolean };
+      registrar_evento: {
+        Args: {
+          p_accion: string;
+          p_entidad: string;
+          p_entidad_id: string;
+          p_ip?: string;
+          p_metadata?: Json;
+          p_persona_id: string;
+          p_user_agent?: string;
+        };
+        Returns: undefined;
+      };
       obtener_enlace_videollamada: {
         Args: { p_profesional_id: string };
         Returns: string;
