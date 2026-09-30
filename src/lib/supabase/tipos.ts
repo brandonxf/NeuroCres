@@ -14,6 +14,74 @@ export type Database = {
   };
   public: {
     Tables: {
+      configuracion: {
+        Row: {
+          clave: string;
+          created_at: string;
+          descripcion: string | null;
+          updated_at: string;
+          valor: Json;
+        };
+        Insert: {
+          clave: string;
+          created_at?: string;
+          descripcion?: string | null;
+          updated_at?: string;
+          valor: Json;
+        };
+        Update: {
+          clave?: string;
+          created_at?: string;
+          descripcion?: string | null;
+          updated_at?: string;
+          valor?: Json;
+        };
+        Relationships: [];
+      };
+      profesionales: {
+        Row: {
+          activo: boolean;
+          created_at: string;
+          enlace_videollamada: string | null;
+          id: string;
+          nombre_publico: string;
+          registro_profesional: string | null;
+          updated_at: string;
+          usuario_id: string;
+          zona_horaria: string;
+        };
+        Insert: {
+          activo?: boolean;
+          created_at?: string;
+          enlace_videollamada?: string | null;
+          id?: string;
+          nombre_publico: string;
+          registro_profesional?: string | null;
+          updated_at?: string;
+          usuario_id: string;
+          zona_horaria?: string;
+        };
+        Update: {
+          activo?: boolean;
+          created_at?: string;
+          enlace_videollamada?: string | null;
+          id?: string;
+          nombre_publico?: string;
+          registro_profesional?: string | null;
+          updated_at?: string;
+          usuario_id?: string;
+          zona_horaria?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "profesionales_usuario_id_fkey";
+            columns: ["usuario_id"];
+            isOneToOne: true;
+            referencedRelation: "usuarios";
+            referencedColumns: ["id"];
+          },
+        ];
+      };
       personas: {
         Row: {
           apellidos: string;
@@ -196,6 +264,10 @@ export type Database = {
         Returns: string;
       };
       es_dueno_de_persona: { Args: { p_persona_id: string }; Returns: boolean };
+      obtener_enlace_videollamada: {
+        Args: { p_profesional_id: string };
+        Returns: string;
+      };
       tiene_rol: { Args: { p_rol: string }; Returns: boolean };
     };
     Enums: {
