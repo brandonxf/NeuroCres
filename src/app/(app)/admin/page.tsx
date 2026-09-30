@@ -15,6 +15,14 @@ export default function PaginaAdmin() {
             </p>
           </Tarjeta>
         </Link>
+        <Link href="/admin/pagos">
+          <Tarjeta className="hover:bg-primario/5 h-full transition-colors">
+            <p className="text-primario font-semibold">Medios de pago</p>
+            <p className="text-suave mt-1 text-sm">
+              Cuentas, Llave y Nequi con los que se paga el anticipo.
+            </p>
+          </Tarjeta>
+        </Link>
         <Link href="/admin/agenda">
           <Tarjeta className="hover:bg-primario/5 h-full transition-colors">
             <p className="text-primario font-semibold">

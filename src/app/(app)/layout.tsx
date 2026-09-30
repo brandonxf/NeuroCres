@@ -10,6 +10,8 @@ export default async function LayoutApp({ children }: LayoutProps<"/">) {
   // Navegación por rol. Se suman las secciones de cada rol que tenga la cuenta.
   const items: ItemNav[] = [
     { href: "/perfil", etiqueta: "Inicio" },
+    { href: "/agendar", etiqueta: "Agendar" },
+    { href: "/mis-citas", etiqueta: "Mis citas" },
     { href: "/mis-personas", etiqueta: "Mis personas" },
   ];
   if (roles.includes("profesional")) {

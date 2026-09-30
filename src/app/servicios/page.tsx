@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { EncabezadoPublico } from "@/components/app/encabezado-publico";
+import { BotonEnlace } from "@/components/ui/boton";
 import { EstadoVacio } from "@/components/ui/estado-vacio";
 import { Tarjeta } from "@/components/ui/tarjeta";
 import {
@@ -94,11 +95,15 @@ export default async function PaginaServicios() {
                         </>
                       )}
                     </dl>
-                    <p className="text-primario text-sm font-medium">
-                      {s.agendable_en_linea
-                        ? "Se agenda en línea"
-                        : "Consultar disponibilidad"}
-                    </p>
+                    {s.agendable_en_linea ? (
+                      <BotonEnlace href={`/agendar/${s.slug}`} tamano="sm">
+                        Agendar
+                      </BotonEnlace>
+                    ) : (
+                      <p className="text-primario text-sm font-medium">
+                        Consultar disponibilidad
+                      </p>
+                    )}
                   </Tarjeta>
                 </li>
               );

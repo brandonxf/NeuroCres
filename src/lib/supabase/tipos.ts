@@ -200,6 +200,51 @@ export type Database = {
           },
         ];
       };
+      comprobantes_pago: {
+        Row: {
+          id: string;
+          mime: string;
+          pago_id: string;
+          storage_path: string;
+          subido_at: string;
+          subido_por: string | null;
+          tamano: number;
+        };
+        Insert: {
+          id?: string;
+          mime: string;
+          pago_id: string;
+          storage_path: string;
+          subido_at?: string;
+          subido_por?: string | null;
+          tamano: number;
+        };
+        Update: {
+          id?: string;
+          mime?: string;
+          pago_id?: string;
+          storage_path?: string;
+          subido_at?: string;
+          subido_por?: string | null;
+          tamano?: number;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "comprobantes_pago_pago_id_fkey";
+            columns: ["pago_id"];
+            isOneToOne: false;
+            referencedRelation: "pagos";
+            referencedColumns: ["id"];
+          },
+          {
+            foreignKeyName: "comprobantes_pago_subido_por_fkey";
+            columns: ["subido_por"];
+            isOneToOne: false;
+            referencedRelation: "usuarios";
+            referencedColumns: ["id"];
+          },
+        ];
+      };
       configuracion: {
         Row: {
           clave: string;
@@ -331,6 +376,45 @@ export type Database = {
           },
         ];
       };
+      configuracion_pagos: {
+        Row: {
+          activo: boolean;
+          banco: string | null;
+          created_at: string;
+          llave: string | null;
+          medio: string;
+          numero: string | null;
+          qr_path: string | null;
+          tipo_cuenta: string | null;
+          titular: string | null;
+          updated_at: string;
+        };
+        Insert: {
+          activo?: boolean;
+          banco?: string | null;
+          created_at?: string;
+          llave?: string | null;
+          medio: string;
+          numero?: string | null;
+          qr_path?: string | null;
+          tipo_cuenta?: string | null;
+          titular?: string | null;
+          updated_at?: string;
+        };
+        Update: {
+          activo?: boolean;
+          banco?: string | null;
+          created_at?: string;
+          llave?: string | null;
+          medio?: string;
+          numero?: string | null;
+          qr_path?: string | null;
+          tipo_cuenta?: string | null;
+          titular?: string | null;
+          updated_at?: string;
+        };
+        Relationships: [];
+      };
       consentimientos_firmados: {
         Row: {
           asentimiento_menor: boolean;
@@ -404,6 +488,70 @@ export type Database = {
           },
         ];
       };
+      devoluciones: {
+        Row: {
+          cita_id: string;
+          created_at: string;
+          estado: string;
+          id: string;
+          medio: string | null;
+          monto_cop: number;
+          pago_id: string | null;
+          realizada_at: string | null;
+          realizada_por: string | null;
+          referencia: string | null;
+          updated_at: string;
+        };
+        Insert: {
+          cita_id: string;
+          created_at?: string;
+          estado?: string;
+          id?: string;
+          medio?: string | null;
+          monto_cop: number;
+          pago_id?: string | null;
+          realizada_at?: string | null;
+          realizada_por?: string | null;
+          referencia?: string | null;
+          updated_at?: string;
+        };
+        Update: {
+          cita_id?: string;
+          created_at?: string;
+          estado?: string;
+          id?: string;
+          medio?: string | null;
+          monto_cop?: number;
+          pago_id?: string | null;
+          realizada_at?: string | null;
+          realizada_por?: string | null;
+          referencia?: string | null;
+          updated_at?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "devoluciones_cita_id_fkey";
+            columns: ["cita_id"];
+            isOneToOne: false;
+            referencedRelation: "citas";
+            referencedColumns: ["id"];
+          },
+          {
+            foreignKeyName: "devoluciones_pago_id_fkey";
+            columns: ["pago_id"];
+            isOneToOne: false;
+            referencedRelation: "pagos";
+            referencedColumns: ["id"];
+          },
+          {
+            foreignKeyName: "devoluciones_realizada_por_fkey";
+            columns: ["realizada_por"];
+            isOneToOne: false;
+            referencedRelation: "usuarios";
+            referencedColumns: ["id"];
+          },
+        ];
+      };
       disponibilidad_semanal: {
         Row: {
           created_at: string;
@@ -441,6 +589,66 @@ export type Database = {
             columns: ["profesional_id"];
             isOneToOne: false;
             referencedRelation: "profesionales";
+            referencedColumns: ["id"];
+          },
+        ];
+      };
+      pagos: {
+        Row: {
+          cita_id: string;
+          concepto: string;
+          created_at: string;
+          estado: string;
+          id: string;
+          medio: string | null;
+          monto_cop: number;
+          motivo_rechazo: string | null;
+          referencia: string | null;
+          updated_at: string;
+          verificado_at: string | null;
+          verificado_por: string | null;
+        };
+        Insert: {
+          cita_id: string;
+          concepto: string;
+          created_at?: string;
+          estado?: string;
+          id?: string;
+          medio?: string | null;
+          monto_cop: number;
+          motivo_rechazo?: string | null;
+          referencia?: string | null;
+          updated_at?: string;
+          verificado_at?: string | null;
+          verificado_por?: string | null;
+        };
+        Update: {
+          cita_id?: string;
+          concepto?: string;
+          created_at?: string;
+          estado?: string;
+          id?: string;
+          medio?: string | null;
+          monto_cop?: number;
+          motivo_rechazo?: string | null;
+          referencia?: string | null;
+          updated_at?: string;
+          verificado_at?: string | null;
+          verificado_por?: string | null;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "pagos_cita_id_fkey";
+            columns: ["cita_id"];
+            isOneToOne: false;
+            referencedRelation: "citas";
+            referencedColumns: ["id"];
+          },
+          {
+            foreignKeyName: "pagos_verificado_por_fkey";
+            columns: ["verificado_por"];
+            isOneToOne: false;
+            referencedRelation: "usuarios";
             referencedColumns: ["id"];
           },
         ];
@@ -718,6 +926,15 @@ export type Database = {
         };
         Returns: string;
       };
+      parametros_agenda: {
+        Args: never;
+        Returns: {
+          antelacion_horas: number;
+          descanso_min: number;
+          granularidad_min: number;
+          horizonte_dias: number;
+        }[];
+      };
       plantilla_firmada_por_mi: {
         Args: { p_plantilla_id: string };
         Returns: boolean;
@@ -726,14 +943,57 @@ export type Database = {
         Args: { p_contenido: string; p_tipo: string; p_titulo: string };
         Returns: string;
       };
+      rechazar_pago: {
+        Args: { p_motivo: string; p_pago_id: string };
+        Returns: undefined;
+      };
+      registrar_comprobante: {
+        Args: {
+          p_mime: string;
+          p_pago_id: string;
+          p_referencia?: string;
+          p_storage_path: string;
+          p_tamano: number;
+        };
+        Returns: undefined;
+      };
       registrar_constancia: {
         Args: { p_consentimiento_id: string; p_ruta: string };
         Returns: undefined;
+      };
+      registrar_pago_saldo: {
+        Args: { p_cita_id: string; p_medio: string; p_referencia?: string };
+        Returns: undefined;
+      };
+      reprogramar_cita: {
+        Args: {
+          p_cita_id: string;
+          p_modalidad?: string;
+          p_nuevo_inicio: string;
+        };
+        Returns: string;
+      };
+      reservar_cita: {
+        Args: {
+          p_inicio: string;
+          p_medio_pago: string;
+          p_modalidad: string;
+          p_persona_id: string;
+          p_politica_id: string;
+          p_profesional_id: string;
+          p_servicio_id: string;
+        };
+        Returns: string;
       };
       tipos_consentimiento_requeridos: {
         Args: { p_persona_id: string };
         Returns: string[];
       };
+      transicion_cita_valida: {
+        Args: { p_desde: string; p_hacia: string };
+        Returns: boolean;
+      };
+      verificar_pago: { Args: { p_pago_id: string }; Returns: undefined };
       calcular_consecuencia: {
         Args: { p_accion: string; p_cita_id: string };
         Returns: {
@@ -778,6 +1038,8 @@ export type Database = {
         Args: { p_cita_id: string; p_motivo?: string; p_nuevo_estado: string };
         Returns: undefined;
       };
+      expiracion_de_cupo: { Args: { p_inicio: string }; Returns: string };
+      expirar_cupos_vencidos: { Args: never; Returns: number };
       es_dueno_de_persona: { Args: { p_persona_id: string }; Returns: boolean };
       registrar_evento: {
         Args: {
@@ -798,6 +1060,23 @@ export type Database = {
           fin: string;
           inicio: string;
         }[];
+      };
+      horario_disponible: {
+        Args: {
+          p_duracion_min: number;
+          p_inicio: string;
+          p_modalidad: string;
+          p_profesional_id: string;
+        };
+        Returns: boolean;
+      };
+      marcar_devolucion_realizada: {
+        Args: {
+          p_devolucion_id: string;
+          p_medio: string;
+          p_referencia?: string;
+        };
+        Returns: undefined;
       };
       obtener_enlace_videollamada: {
         Args: { p_profesional_id: string };

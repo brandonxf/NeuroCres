@@ -24,6 +24,16 @@ export default async function PaginaInicio() {
           Accesos
         </h2>
         <Enlace
+          href="/agendar"
+          titulo="Agendar una cita"
+          texto="Elige el servicio, el horario y paga el anticipo."
+        />
+        <Enlace
+          href="/mis-citas"
+          titulo="Mis citas"
+          texto="Próximas y anteriores, con su estado y su pago."
+        />
+        <Enlace
           href="/mis-personas"
           titulo="Mis personas"
           texto={

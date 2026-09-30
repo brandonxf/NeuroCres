@@ -7,6 +7,22 @@ export default function PaginaProfesional() {
     <>
       <h1 className="text-primario text-2xl font-bold">Mi consulta</h1>
       <div className="grid max-w-2xl gap-4 sm:grid-cols-2">
+        <Link href="/profesional/agenda">
+          <Tarjeta className="hover:bg-primario/5 h-full transition-colors">
+            <p className="text-primario font-semibold">Agenda</p>
+            <p className="text-suave mt-1 text-sm">
+              Citas del día y de la semana, con su estado y su pago.
+            </p>
+          </Tarjeta>
+        </Link>
+        <Link href="/profesional/pagos">
+          <Tarjeta className="hover:bg-primario/5 h-full transition-colors">
+            <p className="text-primario font-semibold">Pagos por verificar</p>
+            <p className="text-suave mt-1 text-sm">
+              Comprobantes de anticipo y devoluciones pendientes.
+            </p>
+          </Tarjeta>
+        </Link>
         <Link href="/profesional/disponibilidad">
           <Tarjeta className="hover:bg-primario/5 h-full transition-colors">
             <p className="text-primario font-semibold">Disponibilidad</p>
