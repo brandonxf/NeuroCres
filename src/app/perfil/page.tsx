@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { redirect } from "next/navigation";
 import { crearClienteServidor } from "@/lib/supabase/server";
 import { cerrarSesion } from "../(auth)/actions";
@@ -29,6 +30,12 @@ export default async function PaginaPerfil() {
         <dt className="text-primario font-medium">Teléfono</dt>
         <dd>{usuario?.telefono ?? "—"}</dd>
       </dl>
+      <Link
+        href="/mis-personas"
+        className="bg-primario text-fondo hover:bg-primario/90 rounded-lg px-4 py-2 text-center font-medium"
+      >
+        Mis personas
+      </Link>
       <form action={cerrarSesion}>
         <button
           type="submit"

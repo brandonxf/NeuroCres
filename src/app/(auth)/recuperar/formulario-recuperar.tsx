@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useState, useTransition } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Campo } from "@/components/auth/campo";
+import { Campo } from "@/components/ui/campo";
 import { Aviso, BotonEnviar } from "@/components/auth/formulario";
 import { esquemaRecuperar, type DatosRecuperar } from "@/lib/validacion/auth";
 import { solicitarRecuperacion, type Resultado } from "../actions";
