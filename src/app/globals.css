@@ -1,25 +1,68 @@
 @import "tailwindcss";
 
+/*
+  Tokens de marca NeuroCres.
+  Paleta: #214B45 · #9EAB95 · #C78F74 · #E8E4D8 · #383838
+  Contraste (sobre el fondo crema): primario 8:1, texto 9:1, texto suave 5:1.
+  El acento y el secundario NO se usan como color de texto sobre crema (contraste bajo):
+  solo como relleno, borde o detalle.
+*/
 :root {
   --nc-primario: #214b45;
+  --nc-primario-oscuro: #1a3b36;
   --nc-secundario: #9eab95;
   --nc-acento: #c78f74;
   --nc-fondo: #e8e4d8;
   --nc-texto: #383838;
+  --nc-texto-suave: #5b5b5b;
+  --nc-superficie: #f8f6ef;
+  --nc-borde: #cfcdbf;
+  --nc-error: #9b2c2c;
 }
 
 @theme inline {
   --color-primario: var(--nc-primario);
+  --color-primario-oscuro: var(--nc-primario-oscuro);
   --color-secundario: var(--nc-secundario);
   --color-acento: var(--nc-acento);
   --color-fondo: var(--nc-fondo);
   --color-texto: var(--nc-texto);
+  --color-suave: var(--nc-texto-suave);
+  --color-superficie: var(--nc-superficie);
+  --color-borde: var(--nc-borde);
+  --color-error: var(--nc-error);
+
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+
+  --radius-tarjeta: 1rem;
+  --radius-control: 0.625rem;
 }
 
 body {
   background: var(--nc-fondo);
   color: var(--nc-texto);
   font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
+}
+
+/* Foco visible y consistente para teclado. */
+:focus-visible {
+  outline: 2px solid var(--nc-primario);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+input[type="radio"],
+input[type="checkbox"] {
+  accent-color: var(--nc-primario);
+  width: 1.125rem;
+  height: 1.125rem;
 }

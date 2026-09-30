@@ -1,4 +1,6 @@
 import type { ComponentProps } from "react";
+import { cn } from "@/lib/cn";
+import { CLASES_CONTROL } from "./campo";
 
 type Props = ComponentProps<"select"> & {
   etiqueta: string;
@@ -25,7 +27,7 @@ export function Selector({
         id={idCampo}
         aria-invalid={Boolean(error)}
         aria-describedby={error ? `${idCampo}-error` : undefined}
-        className="border-secundario text-texto focus:border-primario focus:ring-primario/30 rounded-lg border bg-white px-3 py-2 outline-none focus:ring-2"
+        className={cn(CLASES_CONTROL, error ? "border-error" : "border-borde")}
         {...resto}
       >
         {placeholder && <option value="">{placeholder}</option>}
@@ -36,7 +38,7 @@ export function Selector({
         ))}
       </select>
       {error && (
-        <p id={`${idCampo}-error`} className="text-sm text-red-700">
+        <p id={`${idCampo}-error`} className="text-error text-sm">
           {error}
         </p>
       )}

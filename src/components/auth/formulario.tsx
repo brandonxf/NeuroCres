@@ -1,4 +1,10 @@
 import type { ReactNode } from "react";
+import Link from "next/link";
+import { Boton } from "@/components/ui/boton";
+import { Tarjeta } from "@/components/ui/tarjeta";
+import { Logo } from "@/components/marca/logo";
+
+export { Aviso } from "@/components/ui/aviso";
 
 export function TarjetaAuth({
   titulo,
@@ -8,32 +14,15 @@ export function TarjetaAuth({
   children: ReactNode;
 }) {
   return (
-    <main className="flex flex-1 items-center justify-center px-4 py-10">
-      <div className="w-full max-w-md rounded-2xl bg-white/70 p-6 shadow-sm">
+    <main className="flex flex-1 flex-col items-center justify-center gap-6 px-4 py-10">
+      <Link href="/" aria-label="NeuroCres, ir al inicio">
+        <Logo />
+      </Link>
+      <Tarjeta className="w-full max-w-md p-6">
         <h1 className="text-primario mb-6 text-2xl font-bold">{titulo}</h1>
         {children}
-      </div>
+      </Tarjeta>
     </main>
-  );
-}
-
-export function Aviso({
-  error,
-  mensaje,
-}: {
-  error?: string;
-  mensaje?: string;
-}) {
-  if (!error && !mensaje) return null;
-  return (
-    <p
-      role={error ? "alert" : "status"}
-      className={`rounded-lg px-3 py-2 text-sm ${
-        error ? "bg-red-50 text-red-800" : "bg-secundario/30 text-primario"
-      }`}
-    >
-      {error ?? mensaje}
-    </p>
   );
 }
 
@@ -45,12 +34,8 @@ export function BotonEnviar({
   children: ReactNode;
 }) {
   return (
-    <button
-      type="submit"
-      disabled={enviando}
-      className="bg-primario text-fondo hover:bg-primario/90 rounded-lg px-4 py-2 font-medium transition disabled:opacity-60"
-    >
-      {enviando ? "Un momento…" : children}
-    </button>
+    <Boton type="submit" cargando={enviando}>
+      {children}
+    </Boton>
   );
 }

@@ -83,12 +83,12 @@ export function FormularioPersona(props: Props) {
             ¿Para quién es?
           </legend>
           {!props.tienePropia && (
-            <label className="flex items-center gap-2">
+            <label className="flex min-h-11 items-center gap-2">
               <input type="radio" value="propia" {...register("modo")} />
               Para mí
             </label>
           )}
-          <label className="flex items-center gap-2">
+          <label className="flex min-h-11 items-center gap-2">
             <input type="radio" value="a_cargo" {...register("modo")} />
             Una persona a mi cargo (hijo/a, familiar)
           </label>

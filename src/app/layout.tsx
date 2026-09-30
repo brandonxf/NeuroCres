@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 
@@ -16,6 +16,18 @@ export const metadata: Metadata = {
   title: "NeuroCres",
   description:
     "Un espacio para comprenderte, orientarte y cuidar de tu bienestar.",
+  applicationName: "NeuroCres",
+  appleWebApp: { capable: true, title: "NeuroCres", statusBarStyle: "default" },
+  icons: {
+    icon: [{ url: "/icons/192", sizes: "192x192", type: "image/png" }],
+    apple: [{ url: "/icons/192", sizes: "192x192", type: "image/png" }],
+  },
+};
+
+export const viewport: Viewport = {
+  themeColor: "#214B45",
+  width: "device-width",
+  initialScale: 1,
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

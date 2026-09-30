@@ -1,4 +1,5 @@
 import { notFound } from "next/navigation";
+import { Tarjeta } from "@/components/ui/tarjeta";
 import { personasDelUsuario } from "@/lib/personas";
 import type { DatosPersonaNueva } from "@/lib/validacion/personas";
 import { FormularioPersona } from "../formulario-persona";
@@ -32,9 +33,9 @@ export default async function PaginaEditarPersona({
   } as DatosPersonaNueva;
 
   return (
-    <main className="mx-auto flex w-full max-w-lg flex-1 flex-col gap-6 px-4 py-10">
+    <div className="mx-auto flex w-full max-w-lg flex-col gap-6">
       <h1 className="text-primario text-2xl font-bold">Editar persona</h1>
-      <div className="rounded-2xl bg-white/70 p-6">
+      <Tarjeta className="p-6">
         <FormularioPersona
           tipo="editar"
           id={persona.id}
@@ -42,7 +43,7 @@ export default async function PaginaEditarPersona({
           responsable={responsable}
           esACargo={esACargo}
         />
-      </div>
-    </main>
+      </Tarjeta>
+    </div>
   );
 }
