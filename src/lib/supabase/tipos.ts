@@ -593,6 +593,56 @@ export type Database = {
           },
         ];
       };
+      notificaciones: {
+        Row: {
+          canal: string;
+          created_at: string;
+          enviada_at: string | null;
+          error: string | null;
+          estado: string;
+          id: string;
+          intentos: number;
+          payload: Json;
+          programada_para: string;
+          tipo: string;
+          usuario_id: string;
+        };
+        Insert: {
+          canal?: string;
+          created_at?: string;
+          enviada_at?: string | null;
+          error?: string | null;
+          estado?: string;
+          id?: string;
+          intentos?: number;
+          payload?: Json;
+          programada_para?: string;
+          tipo: string;
+          usuario_id: string;
+        };
+        Update: {
+          canal?: string;
+          created_at?: string;
+          enviada_at?: string | null;
+          error?: string | null;
+          estado?: string;
+          id?: string;
+          intentos?: number;
+          payload?: Json;
+          programada_para?: string;
+          tipo?: string;
+          usuario_id?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "notificaciones_usuario_id_fkey";
+            columns: ["usuario_id"];
+            isOneToOne: false;
+            referencedRelation: "usuarios";
+            referencedColumns: ["id"];
+          },
+        ];
+      };
       pagos: {
         Row: {
           cita_id: string;

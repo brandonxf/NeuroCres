@@ -2,6 +2,7 @@ import { createServerClient } from "@supabase/ssr";
 import { NextResponse, type NextRequest } from "next/server";
 
 const RUTAS_PUBLICAS = [
+  "/api/cron",
   "/privacidad",
   "/politica-cancelacion",
   "/",
