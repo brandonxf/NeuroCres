@@ -31,6 +31,44 @@ export type Database = {
         Update: never;
         Relationships: [];
       };
+      bloqueos: {
+        Row: {
+          created_at: string;
+          fin: string;
+          id: string;
+          inicio: string;
+          motivo: string | null;
+          profesional_id: string;
+          updated_at: string;
+        };
+        Insert: {
+          created_at?: string;
+          fin: string;
+          id?: string;
+          inicio: string;
+          motivo?: string | null;
+          profesional_id: string;
+          updated_at?: string;
+        };
+        Update: {
+          created_at?: string;
+          fin?: string;
+          id?: string;
+          inicio?: string;
+          motivo?: string | null;
+          profesional_id?: string;
+          updated_at?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "bloqueos_profesional_id_fkey";
+            columns: ["profesional_id"];
+            isOneToOne: false;
+            referencedRelation: "profesionales";
+            referencedColumns: ["id"];
+          },
+        ];
+      };
       configuracion: {
         Row: {
           clave: string;
@@ -95,6 +133,47 @@ export type Database = {
             columns: ["usuario_id"];
             isOneToOne: true;
             referencedRelation: "usuarios";
+            referencedColumns: ["id"];
+          },
+        ];
+      };
+      disponibilidad_semanal: {
+        Row: {
+          created_at: string;
+          dia_semana: number;
+          hora_fin: string;
+          hora_inicio: string;
+          id: string;
+          modalidades: string[];
+          profesional_id: string;
+          updated_at: string;
+        };
+        Insert: {
+          created_at?: string;
+          dia_semana: number;
+          hora_fin: string;
+          hora_inicio: string;
+          id?: string;
+          modalidades?: string[];
+          profesional_id: string;
+          updated_at?: string;
+        };
+        Update: {
+          created_at?: string;
+          dia_semana?: number;
+          hora_fin?: string;
+          hora_inicio?: string;
+          id?: string;
+          modalidades?: string[];
+          profesional_id?: string;
+          updated_at?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "disponibilidad_semanal_profesional_id_fkey";
+            columns: ["profesional_id"];
+            isOneToOne: false;
+            referencedRelation: "profesionales";
             referencedColumns: ["id"];
           },
         ];
@@ -358,6 +437,14 @@ export type Database = {
           p_user_agent?: string;
         };
         Returns: undefined;
+      };
+      es_profesional: { Args: { p_profesional_id: string }; Returns: boolean };
+      ocupacion_profesional: {
+        Args: { p_desde: string; p_hasta: string; p_profesional_id: string };
+        Returns: {
+          fin: string;
+          inicio: string;
+        }[];
       };
       obtener_enlace_videollamada: {
         Args: { p_profesional_id: string };
