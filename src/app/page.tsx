@@ -1,5 +1,4 @@
-import Link from "next/link";
-import { Logo } from "@/components/marca/logo";
+import { EncabezadoPublico } from "@/components/app/encabezado-publico";
 import { BotonEnlace } from "@/components/ui/boton";
 import { Tarjeta } from "@/components/ui/tarjeta";
 import { crearClienteServidor } from "@/lib/supabase/server";
@@ -26,20 +25,7 @@ export default async function Inicio() {
 
   return (
     <>
-      <header className="mx-auto flex w-full max-w-5xl items-center justify-between gap-4 px-4 py-4">
-        <Link href="/" aria-label="NeuroCres, inicio">
-          <Logo />
-        </Link>
-        {conSesion ? (
-          <BotonEnlace href="/perfil" variante="secundario" tamano="sm">
-            Mi cuenta
-          </BotonEnlace>
-        ) : (
-          <BotonEnlace href="/ingresar" variante="secundario" tamano="sm">
-            Ingresar
-          </BotonEnlace>
-        )}
-      </header>
+      <EncabezadoPublico />
 
       <main className="mx-auto flex w-full max-w-5xl flex-1 flex-col gap-12 px-4 pt-8 pb-16 md:pt-16">
         <section className="flex max-w-2xl flex-col items-start gap-5">
@@ -60,6 +46,9 @@ export default async function Inicio() {
                 </BotonEnlace>
               </>
             )}
+            <BotonEnlace href="/servicios" variante="fantasma">
+              Ver servicios
+            </BotonEnlace>
           </div>
         </section>
 

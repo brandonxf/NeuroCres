@@ -200,6 +200,72 @@ export type Database = {
           },
         ];
       };
+      servicios: {
+        Row: {
+          activo: boolean;
+          agendable_en_linea: boolean;
+          anticipo_pct: number;
+          created_at: string;
+          descripcion: string | null;
+          duracion_min: number | null;
+          id: string;
+          modalidades: string[];
+          nombre: string;
+          orden: number;
+          poblacion: string | null;
+          precio_cop: number;
+          requiere_anticipo: boolean;
+          requiere_consentimiento: boolean;
+          requiere_formulario: boolean;
+          requiere_presencial: boolean;
+          slug: string;
+          tipo: string;
+          updated_at: string;
+        };
+        Insert: {
+          activo?: boolean;
+          agendable_en_linea?: boolean;
+          anticipo_pct?: number;
+          created_at?: string;
+          descripcion?: string | null;
+          duracion_min?: number | null;
+          id?: string;
+          modalidades?: string[];
+          nombre: string;
+          orden?: number;
+          poblacion?: string | null;
+          precio_cop: number;
+          requiere_anticipo?: boolean;
+          requiere_consentimiento?: boolean;
+          requiere_formulario?: boolean;
+          requiere_presencial?: boolean;
+          slug: string;
+          tipo: string;
+          updated_at?: string;
+        };
+        Update: {
+          activo?: boolean;
+          agendable_en_linea?: boolean;
+          anticipo_pct?: number;
+          created_at?: string;
+          descripcion?: string | null;
+          duracion_min?: number | null;
+          id?: string;
+          modalidades?: string[];
+          nombre?: string;
+          orden?: number;
+          poblacion?: string | null;
+          precio_cop?: number;
+          requiere_anticipo?: boolean;
+          requiere_consentimiento?: boolean;
+          requiere_formulario?: boolean;
+          requiere_presencial?: boolean;
+          slug?: string;
+          tipo?: string;
+          updated_at?: string;
+        };
+        Relationships: [];
+      };
       usuarios: {
         Row: {
           apellidos: string | null;

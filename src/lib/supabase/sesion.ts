@@ -1,7 +1,14 @@
 import { createServerClient } from "@supabase/ssr";
 import { NextResponse, type NextRequest } from "next/server";
 
-const RUTAS_PUBLICAS = ["/", "/ingresar", "/registro", "/recuperar", "/auth"];
+const RUTAS_PUBLICAS = [
+  "/",
+  "/servicios",
+  "/ingresar",
+  "/registro",
+  "/recuperar",
+  "/auth",
+];
 const RUTAS_SOLO_ANONIMO = ["/ingresar", "/registro", "/recuperar"];
 
 function coincide(ruta: string, prefijo: string) {
