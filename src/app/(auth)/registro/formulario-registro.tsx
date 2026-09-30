@@ -70,6 +70,14 @@ export function FormularioRegistro() {
         error={errors.confirmacion?.message}
         {...register("confirmacion")}
       />
+      <p className="text-suave text-xs">
+        Al crear tu cuenta guardamos tus datos para gestionar tus citas. Lee
+        cómo los tratamos en la{" "}
+        <Link href="/privacidad" className="text-primario underline">
+          política de privacidad
+        </Link>
+        .
+      </p>
       <BotonEnviar enviando={enviando}>Crear cuenta</BotonEnviar>
       <p className="text-primario text-sm">
         ¿Ya tienes cuenta?{" "}

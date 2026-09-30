@@ -70,12 +70,20 @@ export default async function PaginaMisPersonas() {
                       )}
                     </div>
                   </div>
-                  <Link
-                    href={`/mis-personas/${p.id}`}
-                    className="text-primario inline-flex min-h-11 items-center px-2 text-sm font-medium underline"
-                  >
-                    Editar
-                  </Link>
+                  <div className="flex flex-col items-end">
+                    <Link
+                      href={`/mis-personas/${p.id}`}
+                      className="text-primario inline-flex min-h-11 items-center px-2 text-sm font-medium underline"
+                    >
+                      Editar
+                    </Link>
+                    <Link
+                      href={`/mis-personas/${p.id}/consentimientos`}
+                      className="text-primario inline-flex min-h-11 items-center px-2 text-sm font-medium underline"
+                    >
+                      Consentimientos
+                    </Link>
+                  </div>
                 </Tarjeta>
               </li>
             );

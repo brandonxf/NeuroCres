@@ -214,6 +214,39 @@ export type Database = {
         };
         Relationships: [];
       };
+      plantillas_consentimiento: {
+        Row: {
+          activa: boolean;
+          contenido: string;
+          created_at: string;
+          id: string;
+          tipo: string;
+          titulo: string;
+          version: number;
+          vigente_desde: string;
+        };
+        Insert: {
+          activa?: boolean;
+          contenido: string;
+          created_at?: string;
+          id?: string;
+          tipo: string;
+          titulo: string;
+          version: number;
+          vigente_desde?: string;
+        };
+        Update: {
+          activa?: boolean;
+          contenido?: string;
+          created_at?: string;
+          id?: string;
+          tipo?: string;
+          titulo?: string;
+          version?: number;
+          vigente_desde?: string;
+        };
+        Relationships: [];
+      };
       profesionales: {
         Row: {
           activo: boolean;
@@ -254,6 +287,79 @@ export type Database = {
             columns: ["usuario_id"];
             isOneToOne: true;
             referencedRelation: "usuarios";
+            referencedColumns: ["id"];
+          },
+        ];
+      };
+      consentimientos_firmados: {
+        Row: {
+          asentimiento_menor: boolean;
+          calidad: string;
+          constancia_path: string | null;
+          firma_trazo_path: string | null;
+          firmado_at: string;
+          firmante_documento: string;
+          firmante_nombre: string;
+          firmante_usuario_id: string;
+          hash_contenido: string;
+          id: string;
+          ip: unknown;
+          persona_id: string;
+          plantilla_id: string;
+          user_agent: string | null;
+        };
+        Insert: {
+          asentimiento_menor?: boolean;
+          calidad: string;
+          constancia_path?: string | null;
+          firma_trazo_path?: string | null;
+          firmado_at?: string;
+          firmante_documento: string;
+          firmante_nombre: string;
+          firmante_usuario_id: string;
+          hash_contenido: string;
+          id?: string;
+          ip?: unknown;
+          persona_id: string;
+          plantilla_id: string;
+          user_agent?: string | null;
+        };
+        Update: {
+          asentimiento_menor?: boolean;
+          calidad?: string;
+          constancia_path?: string | null;
+          firma_trazo_path?: string | null;
+          firmado_at?: string;
+          firmante_documento?: string;
+          firmante_nombre?: string;
+          firmante_usuario_id?: string;
+          hash_contenido?: string;
+          id?: string;
+          ip?: unknown;
+          persona_id?: string;
+          plantilla_id?: string;
+          user_agent?: string | null;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "consentimientos_firmados_firmante_usuario_id_fkey";
+            columns: ["firmante_usuario_id"];
+            isOneToOne: false;
+            referencedRelation: "usuarios";
+            referencedColumns: ["id"];
+          },
+          {
+            foreignKeyName: "consentimientos_firmados_persona_id_fkey";
+            columns: ["persona_id"];
+            isOneToOne: false;
+            referencedRelation: "personas";
+            referencedColumns: ["id"];
+          },
+          {
+            foreignKeyName: "consentimientos_firmados_plantilla_id_fkey";
+            columns: ["plantilla_id"];
+            isOneToOne: false;
+            referencedRelation: "plantillas_consentimiento";
             referencedColumns: ["id"];
           },
         ];
@@ -545,6 +651,48 @@ export type Database = {
           p_tipo_documento: string;
         };
         Returns: string;
+      };
+      consentimientos_completos: {
+        Args: { p_persona_id: string };
+        Returns: boolean;
+      };
+      consentimientos_pendientes: {
+        Args: { p_persona_id: string };
+        Returns: {
+          plantilla_id: string;
+          tipo: string;
+          titulo: string;
+        }[];
+      };
+      edad_en_anios: { Args: { p_fecha_nacimiento: string }; Returns: number };
+      firmar_consentimiento: {
+        Args: {
+          p_asentimiento_menor?: boolean;
+          p_firma_trazo_path?: string;
+          p_firmante_documento: string;
+          p_firmante_nombre: string;
+          p_ip?: string;
+          p_persona_id: string;
+          p_plantilla_id: string;
+          p_user_agent?: string;
+        };
+        Returns: string;
+      };
+      plantilla_firmada_por_mi: {
+        Args: { p_plantilla_id: string };
+        Returns: boolean;
+      };
+      publicar_plantilla: {
+        Args: { p_contenido: string; p_tipo: string; p_titulo: string };
+        Returns: string;
+      };
+      registrar_constancia: {
+        Args: { p_consentimiento_id: string; p_ruta: string };
+        Returns: undefined;
+      };
+      tipos_consentimiento_requeridos: {
+        Args: { p_persona_id: string };
+        Returns: string[];
       };
       cambiar_estado_cita: {
         Args: { p_cita_id: string; p_motivo?: string; p_nuevo_estado: string };

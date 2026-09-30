@@ -25,6 +25,14 @@ export default function PaginaAdmin() {
             </p>
           </Tarjeta>
         </Link>
+        <Link href="/admin/consentimientos">
+          <Tarjeta className="hover:bg-primario/5 h-full transition-colors">
+            <p className="text-primario font-semibold">Consentimientos</p>
+            <p className="text-suave mt-1 text-sm">
+              Textos de consentimiento y autorización de datos, con versiones.
+            </p>
+          </Tarjeta>
+        </Link>
       </div>
       <EstadoVacio
         titulo="Próximamente"

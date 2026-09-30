@@ -8,7 +8,8 @@ export type Bucket = "comprobantes" | "consentimientos" | "documentos";
 /** Segundos que vive una URL firmada. Nunca se guarda ni se muestra una URL permanente. */
 const VIGENCIA_URL_SEGUNDOS = 60;
 
-async function origen() {
+/** IP y navegador de quien hace la petición, para la evidencia de firmas y la auditoría. */
+export async function origen() {
   const h = await headers();
   return {
     ip: h.get("x-forwarded-for")?.split(",")[0]?.trim() ?? undefined,
