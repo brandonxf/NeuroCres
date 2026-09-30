@@ -69,6 +69,127 @@ export type Database = {
           },
         ];
       };
+      citas: {
+        Row: {
+          anticipo_cop: number;
+          bloqueo_hasta: string;
+          cancelada_at: string | null;
+          cancelada_por: string | null;
+          created_at: string;
+          creada_por: string | null;
+          estado: string;
+          expira_cupo_at: string | null;
+          fin: string;
+          id: string;
+          inicio: string;
+          modalidad: string;
+          motivo_cancelacion: string | null;
+          persona_id: string;
+          politica_aceptada_at: string | null;
+          politica_aceptada_id: string | null;
+          precio_cop: number;
+          proceso_id: string | null;
+          profesional_id: string;
+          reprogramada_de: string | null;
+          saldo_cop: number;
+          servicio_id: string;
+          updated_at: string;
+        };
+        Insert: {
+          anticipo_cop: number;
+          bloqueo_hasta: string;
+          cancelada_at?: string | null;
+          cancelada_por?: string | null;
+          created_at?: string;
+          creada_por?: string | null;
+          estado?: string;
+          expira_cupo_at?: string | null;
+          fin: string;
+          id?: string;
+          inicio: string;
+          modalidad: string;
+          motivo_cancelacion?: string | null;
+          persona_id: string;
+          politica_aceptada_at?: string | null;
+          politica_aceptada_id?: string | null;
+          precio_cop: number;
+          proceso_id?: string | null;
+          profesional_id: string;
+          reprogramada_de?: string | null;
+          saldo_cop: number;
+          servicio_id: string;
+          updated_at?: string;
+        };
+        Update: {
+          anticipo_cop?: number;
+          bloqueo_hasta?: string;
+          cancelada_at?: string | null;
+          cancelada_por?: string | null;
+          created_at?: string;
+          creada_por?: string | null;
+          estado?: string;
+          expira_cupo_at?: string | null;
+          fin?: string;
+          id?: string;
+          inicio?: string;
+          modalidad?: string;
+          motivo_cancelacion?: string | null;
+          persona_id?: string;
+          politica_aceptada_at?: string | null;
+          politica_aceptada_id?: string | null;
+          precio_cop?: number;
+          proceso_id?: string | null;
+          profesional_id?: string;
+          reprogramada_de?: string | null;
+          saldo_cop?: number;
+          servicio_id?: string;
+          updated_at?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "citas_cancelada_por_fkey";
+            columns: ["cancelada_por"];
+            isOneToOne: false;
+            referencedRelation: "usuarios";
+            referencedColumns: ["id"];
+          },
+          {
+            foreignKeyName: "citas_creada_por_fkey";
+            columns: ["creada_por"];
+            isOneToOne: false;
+            referencedRelation: "usuarios";
+            referencedColumns: ["id"];
+          },
+          {
+            foreignKeyName: "citas_persona_id_fkey";
+            columns: ["persona_id"];
+            isOneToOne: false;
+            referencedRelation: "personas";
+            referencedColumns: ["id"];
+          },
+          {
+            foreignKeyName: "citas_profesional_id_fkey";
+            columns: ["profesional_id"];
+            isOneToOne: false;
+            referencedRelation: "profesionales";
+            referencedColumns: ["id"];
+          },
+          {
+            foreignKeyName: "citas_reprogramada_de_fkey";
+            columns: ["reprogramada_de"];
+            isOneToOne: false;
+            referencedRelation: "citas";
+            referencedColumns: ["id"];
+          },
+          {
+            foreignKeyName: "citas_servicio_id_fkey";
+            columns: ["servicio_id"];
+            isOneToOne: false;
+            referencedRelation: "servicios";
+            referencedColumns: ["id"];
+          },
+        ];
+      };
       configuracion: {
         Row: {
           clave: string;
@@ -424,6 +545,10 @@ export type Database = {
           p_tipo_documento: string;
         };
         Returns: string;
+      };
+      cambiar_estado_cita: {
+        Args: { p_cita_id: string; p_motivo?: string; p_nuevo_estado: string };
+        Returns: undefined;
       };
       es_dueno_de_persona: { Args: { p_persona_id: string }; Returns: boolean };
       registrar_evento: {
