@@ -54,9 +54,17 @@ select throws_ok(
     values (current_setting('test.hijo')::uuid, '00000000-0000-0000-0000-00000000000b', 'tutor')$$,
   '42501', null, 'B no se agrega como responsable de nadie');
 
--- Como la profesional (D)
+-- Como la profesional (D): solo ve a las personas con las que tiene una cita
+reset role;
+insert into public.profesionales (id, usuario_id, nombre_publico) values
+  ('10000000-0000-0000-0000-00000000000d', '00000000-0000-0000-0000-00000000000d', 'Dra. D');
+insert into public.citas (persona_id, servicio_id, profesional_id, inicio, fin, bloqueo_hasta, modalidad, precio_cop, anticipo_cop, saldo_cop)
+select id, (select id from public.servicios limit 1), '10000000-0000-0000-0000-00000000000d',
+  now() + interval '3 days', now() + interval '3 days 1 hour', now() + interval '3 days 75 minutes', 'presencial', 100, 50, 50
+from public.personas where numero_documento = '1000001';
+set local role authenticated;
 select set_config('request.jwt.claims', '{"sub":"00000000-0000-0000-0000-00000000000d","role":"authenticated"}', true);
-select is((select count(*)::int from public.personas), 2, 'la profesional ve las personas');
+select is((select count(*)::int from public.personas), 1, 'la profesional solo ve a las personas que atiende');
 
 -- Como anónimo
 reset role;

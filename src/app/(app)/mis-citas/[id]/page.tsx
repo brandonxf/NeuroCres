@@ -63,6 +63,11 @@ export default async function PaginaCita({
     );
   const confirmada = cita.estado === "confirmada";
   const modificable = confirmada && new Date(cita.inicio) > new Date();
+  // El enlace de la sala solo se entrega en citas virtuales confirmadas.
+  const { data: enlaceSala } =
+    confirmada && cita.modalidad === "virtual"
+      ? await supabase.rpc("enlace_videollamada_de_cita", { p_cita_id: id })
+      : { data: null };
 
   return (
     <div className="mx-auto flex w-full max-w-2xl flex-col gap-6">
@@ -179,6 +184,27 @@ export default async function PaginaCita({
             />
           )}
           <FormularioComprobante pagoId={anticipo.id} />
+        </Tarjeta>
+      )}
+
+      {confirmada && cita.modalidad === "virtual" && (
+        <Tarjeta className="flex flex-col gap-2">
+          <h2 className="text-primario font-semibold">Sala virtual</h2>
+          {enlaceSala ? (
+            <BotonEnlace
+              href={enlaceSala}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="self-start"
+            >
+              Entrar a la sala
+            </BotonEnlace>
+          ) : (
+            <p className="text-suave text-sm">
+              La profesional aún no ha configurado el enlace de la sala. Te
+              avisaremos cuando esté disponible.
+            </p>
+          )}
         </Tarjeta>
       )}
 

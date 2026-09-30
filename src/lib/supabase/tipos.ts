@@ -976,6 +976,10 @@ export type Database = {
         };
         Returns: string;
       };
+      profesional_atiende_a: {
+        Args: { p_persona_id: string };
+        Returns: boolean;
+      };
       parametros_agenda: {
         Args: never;
         Returns: {
@@ -1090,6 +1094,19 @@ export type Database = {
       };
       expiracion_de_cupo: { Args: { p_inicio: string }; Returns: string };
       expirar_cupos_vencidos: { Args: never; Returns: number };
+      encolar_notificacion: {
+        Args: {
+          p_payload: Json;
+          p_programada_para?: string;
+          p_tipo: string;
+          p_usuario_id: string;
+        };
+        Returns: undefined;
+      };
+      enlace_videollamada_de_cita: {
+        Args: { p_cita_id: string };
+        Returns: string;
+      };
       es_dueno_de_persona: { Args: { p_persona_id: string }; Returns: boolean };
       registrar_evento: {
         Args: {
@@ -1120,6 +1137,7 @@ export type Database = {
         };
         Returns: boolean;
       };
+      invocar_envio_de_notificaciones: { Args: never; Returns: undefined };
       marcar_devolucion_realizada: {
         Args: {
           p_devolucion_id: string;

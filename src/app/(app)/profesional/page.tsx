@@ -31,6 +31,14 @@ export default function PaginaProfesional() {
             </p>
           </Tarjeta>
         </Link>
+        <Link href="/profesional/perfil">
+          <Tarjeta className="hover:bg-primario/5 h-full transition-colors">
+            <p className="text-primario font-semibold">Mi perfil</p>
+            <p className="text-suave mt-1 text-sm">
+              Nombre público y enlace de tu sala virtual.
+            </p>
+          </Tarjeta>
+        </Link>
         <Link href="/profesional/consentimientos">
           <Tarjeta className="hover:bg-primario/5 h-full transition-colors">
             <p className="text-primario font-semibold">Consentimientos</p>

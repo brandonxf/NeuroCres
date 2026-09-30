@@ -58,7 +58,14 @@ select set_config('request.jwt.claims', '{"sub":"00000000-0000-0000-0000-0000000
 select is((select count(*)::int from public.auditoria), 0, 'B no ve la auditoría de A');
 select is((select count(*)::int from storage.objects where bucket_id = 'comprobantes'), 0, 'B no ve los comprobantes de A');
 
--- Como la profesional
+-- Como la profesional (atiende a la persona A)
+reset role;
+insert into public.profesionales (id, usuario_id, nombre_publico) values
+  ('10000000-0000-0000-0000-00000000000d', '00000000-0000-0000-0000-00000000000d', 'Dra. D');
+insert into public.citas (persona_id, servicio_id, profesional_id, inicio, fin, bloqueo_hasta, modalidad, precio_cop, anticipo_cop, saldo_cop)
+values ('20000000-0000-0000-0000-00000000000a', (select id from public.servicios limit 1), '10000000-0000-0000-0000-00000000000d',
+  now() + interval '3 days', now() + interval '3 days 1 hour', now() + interval '3 days 75 minutes', 'presencial', 100, 50, 50);
+set local role authenticated;
 select set_config('request.jwt.claims', '{"sub":"00000000-0000-0000-0000-00000000000d","role":"authenticated"}', true);
 select is((select count(*)::int from storage.objects where bucket_id = 'comprobantes'), 1, 'la profesional ve el comprobante');
 select lives_ok(
@@ -67,7 +74,7 @@ select lives_ok(
 
 -- Como administrador
 select set_config('request.jwt.claims', '{"sub":"00000000-0000-0000-0000-00000000000c","role":"authenticated"}', true);
-select is((select count(*)::int from public.auditoria), 1, 'el administrador ve la auditoría');
+select is((select count(*)::int from public.auditoria), 2, 'el administrador ve toda la auditoría (el comprobante y la creación de la cita)');
 
 -- Como anónimo
 reset role;
